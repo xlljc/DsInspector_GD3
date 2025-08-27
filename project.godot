@@ -1,0 +1,128 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "HBoxContainer",
+"class": "BaseAttr",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/Attributes/BaseAttr.gd"
+}, {
+"base": "BaseAttr",
+"class": "BoolAttr",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/Attributes/BoolAttr.gd"
+}, {
+"base": "Node2D",
+"class": "Brush",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/Brush.gd"
+}, {
+"base": "BaseAttr",
+"class": "ColorAttr",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/Attributes/ColorAttr.gd"
+}, {
+"base": "Tree",
+"class": "ExcludeList",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/ExcludeList.gd"
+}, {
+"base": "VBoxContainer",
+"class": "InspectorContainer",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/InspectorContainer.gd"
+}, {
+"base": "BaseAttr",
+"class": "LabelAttr",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/Attributes/LabelAttr.gd"
+}, {
+"base": "Tree",
+"class": "NodeTree",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/NodeTree.gd"
+}, {
+"base": "BaseAttr",
+"class": "NumberAttr",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/Attributes/NumberAttr.gd"
+}, {
+"base": "BaseAttr",
+"class": "RectAttr",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/Attributes/RectAttr.gd"
+}, {
+"base": "BaseAttr",
+"class": "SpriteFramesAttr",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/Attributes/SpriteFramesAttr.gd"
+}, {
+"base": "BaseAttr",
+"class": "StringAttr",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/Attributes/StringAttr.gd"
+}, {
+"base": "BaseAttr",
+"class": "TextureAttr",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/Attributes/TextureAttr.gd"
+}, {
+"base": "BaseAttr",
+"class": "Vector2Attr",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/Attributes/Vector2Attr.gd"
+} ]
+_global_script_class_icons={
+"BaseAttr": "",
+"BoolAttr": "",
+"Brush": "",
+"ColorAttr": "",
+"ExcludeList": "",
+"InspectorContainer": "",
+"LabelAttr": "",
+"NodeTree": "",
+"NumberAttr": "",
+"RectAttr": "",
+"SpriteFramesAttr": "",
+"StringAttr": "",
+"TextureAttr": "",
+"Vector2Attr": ""
+}
+
+[application]
+
+config/name="DsInspector"
+run/main_scene="res://Main.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+DsInspector="*res://addons/ds_inspector_gd3/DsInspector.tscn"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/ds_inspector_gd3/plugin.cfg" )
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://RotAnim.gd" type="Script" id=3]
+
+[node name="Icon" type="Sprite"]
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="Icon" type="Sprite" parent="."]
+position = Vector2( -112, 162 )
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+rotation_speed = 30.0
+
+[node name="Icon2" type="Sprite" parent="Icon"]
+position = Vector2( -71, -86 )
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+rotation_speed = 60.0
+
+[node name="Icon2" type="Sprite" parent="."]
+position = Vector2( -40, -50 )
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+rotation_speed = 60.0
+
+[node name="Icon2" type="Sprite" parent="Icon2"]
+position = Vector2( -29, -88 )
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+rotation_speed = 60.0
