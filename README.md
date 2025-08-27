@@ -1,46 +1,46 @@
-
 # DsInspector_GD3
 
-**DsInspector(Developer Suppert Inspector)** 是一个用于 **Godot3** 的运行时调试插件，允许你在 **游戏运行时** 实时查看和修改场景树中的节点和属性。
-它提供类似于编辑器 Inspector 的功能，让开发者在调试和测试过程中更加方便直观。
+[English](README.md)|[中文](README_zh.md)
+
+**DsInspector (Developer Support Inspector)** is a runtime debugging plugin for **Godot 3** that lets you inspect and modify nodes and properties in the scene tree while the game is running.
+It provides Inspector-like features similar to the editor, making debugging and testing more convenient and intuitive.
 
 ![screenshot](addons/ds_inspector_gd3/Icon.png)
 
-## 功能特性
+## Features
 
-* **实时节点树查看**：显示当前运行场景中的所有节点。
-* **节点属性检查**：支持查看和修改节点的属性值（包括脚本导出变量），修改属性后立即生效。
-* **节点搜索**：快速查找目标节点。
-* **节点选中高亮**：在游戏画面中定位选中的节点，选择`拣选节点`后点击场景内元素即可选择节点，如果元素堆叠，连续点击元素即可依次选中节点。
-* **排除路径**：过滤指定路径，方便快速定位节点。
-* **打开脚本/场景路径**：在属性面板中可快速打开关联的脚本或在资源管理器中定位场景文件路径，方便跳转查看源文件。
-* **将节点保存为场景**：支持将选中的节点导出并保存为新的场景（例如 `.tscn`），便于复用和共享。
-* **做弊按钮**：可以通过`DsInspector.add_cheat_button()`快速添加做弊按钮。
+- Real-time scene tree view: Shows all nodes in the currently running scene.
+- Node property inspection: View and edit node properties (including exported script variables); changes take effect immediately.
+- Node search: Quickly find target nodes.
+- Node selection & highlight: Locate the selected node in the game view. After enabling "Pick Node", click scene elements to select them; if elements overlap, click repeatedly to cycle through stacked nodes.
+- Exclude paths: Filter specific paths to quickly focus on relevant nodes.
+- Open script/scene path: Quickly open associated scripts or locate scene files in the file system from the property panel.
+- Save node as scene: Export the selected node as a new scene (`.tscn`) for reuse and sharing.
+- Cheat button helper: Add cheat/test buttons quickly via `DsInspector.add_cheat_button()`.
 
-## 支持版本
+## Supported Versions
 
-本插件针对 Godot 3.5+ 系列开发和测试，不支持更低版本。
+This plugin is developed and tested for the Godot 3.5+ series and does not support earlier versions.
+Godot 4.0+ is not supported yet; compatibility work for 4.0 is in progress and updates will be provided in the repository.
 
-目前不支持 Godot 4.0 及以上版本：对 4.0 的兼容工作正在进行中，后续会在仓库中更新支持说明和分支。
+## Installation
 
-## 安装方法
+1. Clone this repository and copy the `addons/` folder into your Godot project's `addons/` directory.
 
-1. 将本仓库克隆，并将 `addons/` 复制到你的 Godot 工程的 `addons/` 文件夹下
+2. Enable the plugin in `project.godot`:
 
-2. 在 `project.godot` 中启用插件：
+   - Open `Project > Project Settings > Plugins` in the editor.
+   - Find `DsInspector_GD3` and enable it.
 
-   * 打开 `Project > Project Settings > Plugins`
-   * 找到 `DsInspector_GD3` 并启用
+3. Run the game — a floating icon will appear. Click it to open the inspector.
 
-3. 运行游戏后会自动出现一个悬浮窗口，点击悬浮窗口即可打开检查器。
+## Screenshots
 
-## 截图
-
-### 节点树与属性面板
+### Scene tree & property panel
 
 ![screenshot](docs/img1.png)
 ![screenshot](docs/img2.png)
 
-## 许可证
+## License
 
-本项目使用 **MIT License**。
+This project is licensed under the MIT License.
