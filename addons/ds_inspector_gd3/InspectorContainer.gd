@@ -3,6 +3,8 @@ class_name InspectorContainer
 
 export var update_time: float = 0.2 # 更新时间
 
+export var filtr_input_path: NodePath # 过滤属性输入框
+
 var _curr_node: Node
 var _timer: float = 0
 
@@ -21,6 +23,8 @@ onready var texture_attr: PackedScene = preload("res://addons/ds_inspector_gd3/A
 onready var sprite_frames_attr: PackedScene = preload("res://addons/ds_inspector_gd3/Attributes/SpriteFramesAttr.tscn")
 onready var enum_attr: PackedScene = preload("res://addons/ds_inspector_gd3/Attributes/EnumAttr.tscn")
 
+onready var filtr_input: LineEdit = get_node(filtr_input_path)
+
 class AttrItem:
 	var attr: BaseAttr
 	var name: String
@@ -35,7 +39,8 @@ class AttrItem:
 	pass
 
 func _ready():
-
+	if filtr_input:
+		filtr_input.connect("text_changed", self, "_on_filter_text_changed")
 	pass
 
 func _process(delta):
@@ -65,6 +70,10 @@ func _init_node_attr():
 
 	# 节点名称
 	_create_label_attr(_curr_node, "名称：", _curr_node.name)
+
+	# 节点类型
+	_create_label_attr(_curr_node, "类型：", _curr_node.get_class())
+
 	# _curr_node.name
 	var path: String = ""
 	var curr: Node = _curr_node
@@ -181,4 +190,23 @@ func _clear_node_attr():
 	_attr_list.clear()
 	for child in get_children():
 			child.queue_free()
+	pass
+
+func _on_filter_text_changed(new_text: String):
+	_filter_attributes(new_text)
+	pass
+
+func _filter_attributes(filter_text: String):
+	if filter_text == "":
+		# 显示所有属性
+		for item in _attr_list:
+			item.attr.visible = true
+	else:
+		# 过滤属性（不区分大小写，忽略下划线）
+		var filter_lower = filter_text.to_lower().replace("_", "")
+		for item in _attr_list:
+			var title_lower = item.name.to_lower().replace("_", "")
+			var name_lower = item.name.to_lower().replace("_", "")
+			var matches = (filter_lower in title_lower) or (filter_lower in name_lower)
+			item.attr.visible = matches
 	pass

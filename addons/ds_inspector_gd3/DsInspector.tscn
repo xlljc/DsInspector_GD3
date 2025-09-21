@@ -105,7 +105,7 @@ script = ExtResource( 4 )
 window_path = NodePath("WindowDialog")
 brush_path = NodePath("Brush")
 mask_path = NodePath("Mask")
-inspector_path = NodePath("WindowDialog/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Inspector/InspectorContainer")
+inspector_path = NodePath("WindowDialog/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Inspector/Scroll/InspectorContainer")
 tips_path = NodePath("Tips")
 tips_anim_path = NodePath("Tips/AnimationPlayer")
 cheat_path = NodePath("WindowDialog/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Cheat")
@@ -116,7 +116,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="WindowDialog" type="WindowDialog" parent="."]
-visible = true
 margin_left = 100.0
 margin_top = 99.0
 margin_right = 821.0
@@ -278,20 +277,35 @@ tab_align = 0
 script = ExtResource( 8 )
 tab_names = [ "检查器", "排除路径", "作弊" ]
 
-[node name="Inspector" type="ScrollContainer" parent="WindowDialog/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer"]
+[node name="Inspector" type="VBoxContainer" parent="WindowDialog/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
 margin_top = 34.0
 margin_right = -5.0
 margin_bottom = -5.0
-size_flags_horizontal = 3
 
-[node name="InspectorContainer" type="VBoxContainer" parent="WindowDialog/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Inspector"]
+[node name="FiltrInput" type="LineEdit" parent="WindowDialog/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Inspector"]
 margin_right = 443.0
+margin_bottom = 27.0
+placeholder_text = "筛选属性"
+
+[node name="Scroll" type="ScrollContainer" parent="WindowDialog/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Inspector"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 31.0
+margin_bottom = 31.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="InspectorContainer" type="VBoxContainer" parent="WindowDialog/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Inspector/Scroll"]
+margin_right = 443.0
+margin_bottom = 845.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/separation = 10
 script = ExtResource( 5 )
+filtr_input_path = NodePath("../../FiltrInput")
 
 [node name="ExcludeContainer" type="VBoxContainer" parent="WindowDialog/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer"]
 visible = false
