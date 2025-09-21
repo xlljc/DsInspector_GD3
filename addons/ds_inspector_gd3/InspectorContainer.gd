@@ -6,6 +6,7 @@ export var update_time: float = 0.2 # 更新时间
 export var filtr_input_path: NodePath # 过滤属性输入框
 
 var _curr_node: Node
+var _has_node: bool = false
 var _timer: float = 0
 
 const flag: int = PROPERTY_USAGE_SCRIPT_VARIABLE | PROPERTY_USAGE_EDITOR
@@ -44,7 +45,7 @@ func _ready():
 	pass
 
 func _process(delta):
-	if _curr_node:
+	if _has_node:
 		if !is_instance_valid(_curr_node):
 			_clear_node_attr()
 			pass
@@ -59,8 +60,13 @@ func set_view_node(node: Node):
 	if node == null or !is_instance_valid(node):
 		return
 	_curr_node = node
+	_has_node = true
 	_init_node_attr()
 	_update_node_attr()
+	
+	# 应用当前的过滤条件
+	if filtr_input and filtr_input.text != "":
+		_filter_attributes(filtr_input.text)
 	pass
 
 func _init_node_attr():
@@ -187,6 +193,7 @@ func _update_node_attr():
 
 func _clear_node_attr():
 	_curr_node = null
+	_has_node = false
 	_attr_list.clear()
 	for child in get_children():
 			child.queue_free()

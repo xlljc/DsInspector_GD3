@@ -7,7 +7,7 @@ onready var add_btn: Button = get_node(add_btn_path)
 onready var debug_tool = get_node("/root/DsInspector")
 var _list: Array = []
 var _root_item: TreeItem
-onready var _delete_icon: Texture = preload("res://addons/ds_inspector_gd3/node_icon/delete.svg")
+onready var _delete_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/delete.svg")
 
 const SAVE_PATH := "user://exclude_select.json"
 

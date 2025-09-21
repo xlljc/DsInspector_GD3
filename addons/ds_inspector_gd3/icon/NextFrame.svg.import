@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Down.png-8333251081a20a92f85d4e7285ea9409.stex"
+path="res://.import/NextFrame.svg-f2ad8f8496704c6913b33bb16b33f228.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ds_inspector_gd3/Down.png"
-dest_files=[ "res://.import/Down.png-8333251081a20a92f85d4e7285ea9409.stex" ]
+source_file="res://addons/ds_inspector_gd3/icon/NextFrame.svg"
+dest_files=[ "res://.import/NextFrame.svg-f2ad8f8496704c6913b33bb16b33f228.stex" ]
 
 [params]
 

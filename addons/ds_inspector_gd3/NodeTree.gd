@@ -145,7 +145,7 @@ class IconMapping:
 		if mapping.has(cls_name):
 			return mapping[cls_name]
 #		print("未知节点：", cls_name)
-		return "res://addons/ds_inspector_gd3/node_icon/icon_error_sign.png";
+		return "res://addons/ds_inspector_gd3/icon/icon_error_sign.png";
 		pass
 pass
 
@@ -159,10 +159,10 @@ var _next_frame_index: int = 0
 var _next_frame_select: TreeItem = null # 下一帧要选中的item
 onready var icon_mapping: IconMapping = IconMapping.new()
 onready var debug_tool = get_node("/root/DsInspector")
-onready var _script_icon: Texture = preload("res://addons/ds_inspector_gd3/node_icon/icon_script.svg")
-onready var _scene_icon: Texture = preload("res://addons/ds_inspector_gd3/node_icon/icon_play_scene.svg")
-onready var _visible_icon: Texture = preload("res://addons/ds_inspector_gd3/Visible.png")
-onready var _hide_icon: Texture = preload("res://addons/ds_inspector_gd3/Hide.png")
+onready var _script_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/icon_script.svg")
+onready var _scene_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/icon_play_scene.svg")
+onready var _visible_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/Visible.png")
+onready var _hide_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/Hide.png")
 
 func _ready():
 	# 选中item信号
@@ -183,6 +183,7 @@ func _process(delta):
 		if _next_frame_index <= 0:
 			_next_frame_select.select(0)
 			_next_frame_select = null
+			ensure_cursor_is_visible()
 	pass
 
 # 初始化树
@@ -253,11 +254,12 @@ func delete_selected():
 		var data: NodeData = item.get_metadata(0)
 		if data:
 			var parent: TreeItem = item.get_parent()
-			data.node.queue_free()
+			if data.node:
+				data.node.queue_free()
 			item.free()
 
 			# 刷新场景树
-			_update_children(parent, parent.get_metadata(0))
+			# _update_children(parent, parent.get_metadata(0))
 			return
 	pass
 
@@ -299,8 +301,7 @@ func locate_selected(select_node: Node):
 					break
 				child_item = child_item.get_next()
 			
-			if !flag: # 找不到，就创建
-				curr_item = create_node_item(node, curr_item, false)
+			if !flag: # 找不到，不要再继续往下找了
 				break
 	
 	if curr_item == null:
@@ -462,7 +463,10 @@ func _on_item_collapsed(item: TreeItem):
 	var children: TreeItem = item.get_children()
 	if !children: # 没有子节点
 		if data and data.node.get_child_count() > 0: # 加载子节点
-			call_deferred("_load_children_item", item)
+			if _is_in_select_func:
+				_load_children_item(item)
+			else:
+				call_deferred("_load_children_item", item)
 		return
 	var child_data: NodeData = children.get_metadata(0)
 	if !child_data: # 没有data，说明没有初始化数据，这里也有加载子节点

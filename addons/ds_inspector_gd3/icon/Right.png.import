@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Icon_Hover.png-a3415710116d536a436e8402ffc3ac25.stex"
+path="res://.import/Right.png-85a0b3bd73a025c2bdecf8e7e7407933.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ds_inspector_gd3/Icon_Hover.png"
-dest_files=[ "res://.import/Icon_Hover.png-a3415710116d536a436e8402ffc3ac25.stex" ]
+source_file="res://addons/ds_inspector_gd3/icon/Right.png"
+dest_files=[ "res://.import/Right.png-85a0b3bd73a025c2bdecf8e7e7407933.stex" ]
 
 [params]
 

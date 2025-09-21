@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Icon.png-0faca6aabfde8f5496991e06df641925.stex"
+path="res://.import/Pause.svg-be9eb314027016c04442330eecc07c9e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ds_inspector_gd3/Icon.png"
-dest_files=[ "res://.import/Icon.png-0faca6aabfde8f5496991e06df641925.stex" ]
+source_file="res://addons/ds_inspector_gd3/icon/Pause.svg"
+dest_files=[ "res://.import/Pause.svg-be9eb314027016c04442330eecc07c9e.stex" ]
 
 [params]
 

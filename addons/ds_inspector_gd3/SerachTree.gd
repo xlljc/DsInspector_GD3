@@ -2,10 +2,10 @@ extends Tree
 
 export var node_tree_path: NodePath
 
-onready var _script_icon: Texture = preload("res://addons/ds_inspector_gd3/node_icon/icon_script.svg")
-onready var _scene_icon: Texture = preload("res://addons/ds_inspector_gd3/node_icon/icon_play_scene.svg")
-onready var _visible_icon: Texture = preload("res://addons/ds_inspector_gd3/Visible.png")
-onready var _hide_icon: Texture = preload("res://addons/ds_inspector_gd3/Hide.png")
+onready var _script_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/icon_script.svg")
+onready var _scene_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/icon_play_scene.svg")
+onready var _visible_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/Visible.png")
+onready var _hide_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/Hide.png")
 
 onready var node_tree: NodeTree = get_node(node_tree_path)
 var _root_item: TreeItem

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon_play_scene.svg-910fcbcc99b531daa82bb45b026b2342.stex"
+path="res://.import/Icon_Pressed.png-993165292152fb098af9ad80c6df45ed.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ds_inspector_gd3/node_icon/icon_play_scene.svg"
-dest_files=[ "res://.import/icon_play_scene.svg-910fcbcc99b531daa82bb45b026b2342.stex" ]
+source_file="res://addons/ds_inspector_gd3/icon/Icon_Pressed.png"
+dest_files=[ "res://.import/Icon_Pressed.png-993165292152fb098af9ad80c6df45ed.stex" ]
 
 [params]
 

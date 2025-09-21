@@ -7,8 +7,10 @@ export var save_btn_path: NodePath;
 export var delete_btn_path: NodePath;
 export var hide_border_btn_path: NodePath;
 export var play_btn_path: NodePath;
+export var next_frame_btn_path: NodePath;
 export var file_window_path: NodePath;
 export var put_away_path: NodePath;
+export var confirmation_path: NodePath;
 
 const SAVE_PATH := "user://ds_inspector_window.txt"
 
@@ -19,9 +21,17 @@ onready var save_btn: Button = get_node(save_btn_path)
 onready var delete_btn: Button = get_node(delete_btn_path)
 onready var hide_border_btn: Button = get_node(hide_border_btn_path)
 onready var play_btn: Button = get_node(play_btn_path)
+onready var next_frame_btn: Button = get_node(next_frame_btn_path)
 onready var file_window: FileDialog = get_node(file_window_path)
 onready var put_away: Button = get_node(put_away_path)
+onready var confirmation: ConfirmationDialog = get_node(confirmation_path)
+
 onready var debug_tool = get_node("/root/DsInspector")
+
+onready var play_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/Play.svg")
+onready var pause_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/Pause.svg")
+
+var _next_frame_paused_index: int = 0
 
 func _ready():
 	_load_window_state()
@@ -29,11 +39,20 @@ func _ready():
 	delete_btn.connect("pressed", self, "delete_btn_click")
 	hide_border_btn.connect("pressed", self, "hide_border_btn_click")
 	play_btn.connect("pressed", self, "play_btn_click")
+	next_frame_btn.connect("pressed", self, "next_frame_btn_click")
 	save_btn.connect("pressed", self, "save_btn_click")
 	connect("popup_hide", self, "do_hide")
 	connect("resized", self, "_on_window_resized")
 	file_window.connect("file_selected", self, "on_file_selected")
 	put_away.connect("pressed", self, "do_put_away")
+	confirmation.connect("confirmed", self, "_on_delete_confirmed")
+
+func _process(delta):
+	if _next_frame_paused_index > 0:
+		_next_frame_paused_index -= 1
+		if _next_frame_paused_index == 0:
+			get_tree().paused = true
+	pass
 
 # 显示弹窗
 func do_show():
@@ -45,6 +64,7 @@ func do_show():
 		tree.show_tree(debug_tool.brush._draw_node)
 		# debug_tool.brush.set_draw_node(debug_tool.brush._draw_node)
 		debug_tool.brush.set_show_text(false)
+		refresh_icon()
 	pass
 
 # 隐藏弹窗
@@ -60,8 +80,13 @@ func select_btn_click():
 		debug_tool._is_open_check_ui = true
 
 func delete_btn_click():
-	tree.delete_selected();
+	confirmation.dialog_text = "确定要删除选中的节点吗？"
+	confirmation.popup()
 	pass
+
+# 确认框确认后执行删除
+func _on_delete_confirmed():
+	tree.delete_selected()
 
 func hide_border_btn_click():
 	if debug_tool:
@@ -71,8 +96,27 @@ func hide_border_btn_click():
 func play_btn_click():
 	var p = !get_tree().paused
 	get_tree().paused = p
-	play_btn.text = "继续游戏" if p else "暂停游戏"
+	# play_btn.text = "继续游戏" if p else "暂停游戏"
+	refresh_icon()
+
+func refresh_icon():
+	var p: bool = get_tree().paused
+	if p:
+		play_btn.icon = play_icon
+		next_frame_btn.disabled = false
+	else:
+		play_btn.icon = pause_icon
+		next_frame_btn.disabled = true
 	pass
+
+func next_frame_btn_click():
+	if !get_tree().paused:
+		print("当前未暂停，无法单步")
+		return
+	get_tree().paused = false
+	_next_frame_paused_index = 2
+	pass
+
 
 func save_btn_click():
 	if debug_tool and debug_tool.brush._draw_node != null:
