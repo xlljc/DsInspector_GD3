@@ -21,7 +21,7 @@ It provides Inspector-like features similar to the editor, making debugging and 
 ## Supported Versions
 
 This plugin is developed and tested for the Godot 3.5+ series and does not support earlier versions.
-Godot 4.0+ is not supported yet; compatibility work for 4.0 is in progress and updates will be provided in the repository.
+This repository does not support versions 4.0 and above. If you need to use it in Godot4x, please use this repository: https://github.com/xlljc/DsInspector
 
 ## Installation
 

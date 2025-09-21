@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://TestTimer.gd" type="Script" id=1]
-
-[node name="TestTimer" type="Timer"]
-script = ExtResource( 1 )
-
-[connection signal="timeout" from="." to="." method="_on_TestTimer_timeout"]
