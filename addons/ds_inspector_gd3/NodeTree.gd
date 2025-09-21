@@ -8,6 +8,7 @@ class NodeData:
 	var script_icon_index: int = -1
 	var scene_icon_index: int = -1
 	var visible: bool = false
+	var slot_item: TreeItem = null
 	func _init(_node: Node):
 		name = _node.name
 		node = _node
@@ -144,7 +145,7 @@ class IconMapping:
 		if mapping.has(cls_name):
 			return mapping[cls_name]
 #		print("未知节点：", cls_name)
-		return "res://addons/ds_inspector_gd3/node_icon/icon_error_sign.svg";
+		return "res://addons/ds_inspector_gd3/node_icon/icon_error_sign.png";
 		pass
 pass
 
@@ -203,7 +204,7 @@ func init_tree():
 	for child in root.get_children():
 		if debug_tool and child == debug_tool:
 			continue  # 跳过 DsInspector 节点
-		create_node_item(child, root_item)
+		create_node_item(child, root_item, true)
 
 # 显示场景树
 func show_tree(select_node: Node = null):
@@ -317,8 +318,26 @@ func locate_selected(select_node: Node):
 
 # 更新子节点
 func _update_children(parent_item: TreeItem, parent_data: NodeData):
-	# 没展开就不要更新了
 	if parent_item.collapsed:
+		# 没展开需要判断是否有子节点，并生成占位符
+		if parent_data.slot_item == null:
+			if parent_data.node.get_child_count() > 0:
+				parent_data.slot_item = create_item(parent_item)  # 创建一个子节点项以便展开
+			elif parent_item.get_children() != null:
+				# 没有子节点了，移除所有子节点
+				var child: TreeItem = parent_item.get_children()
+				while child:
+					var next: TreeItem = child.get_next()
+					child.free()
+					child = next
+		elif parent_data.node.get_child_count() == 0:
+			# 没有子节点了，移除所有子节点
+			var child: TreeItem = parent_item.get_children()
+			while child:
+				var next: TreeItem = child.get_next()
+				child.free()
+				child = next
+			parent_data.slot_item = null
 		return
 
 	var existing_node: Dictionary = {}
@@ -349,7 +368,7 @@ func _update_children(parent_item: TreeItem, parent_data: NodeData):
 			continue
 		else:
 			# 节点不存在，添加到 TreeItem
-			create_node_item(child_node, parent_item)
+			create_node_item(child_node, parent_item, true)
 	# 最后剩下的就是已删除的节点
 	for item in existing_node.values():
 		item.tree_item.free()  # 删除 TreeItem
@@ -357,7 +376,7 @@ func _update_children(parent_item: TreeItem, parent_data: NodeData):
 
 
 # 创建一个新的 TreeItem
-func create_node_item(node: Node, parent: TreeItem, add_slot: bool = true) -> TreeItem:
+func create_node_item(node: Node, parent: TreeItem, add_slot: bool) -> TreeItem:
 	var item: TreeItem = create_item(parent)
 	item.collapsed = true
 	var node_data = NodeData.new(node)
@@ -381,7 +400,8 @@ func create_node_item(node: Node, parent: TreeItem, add_slot: bool = true) -> Tr
 		item.add_button(0, get_visible_icon(node_data.visible))  # 添加显示/隐藏按钮
 		btn_index += 1
 	if add_slot and node.get_child_count() > 0:
-		create_item(item)  # 创建一个子节点项以便展开
+		var slot = create_item(item)  # 创建一个子节点项以便展开
+		node_data.slot_item = slot  # 记录占位符
 	return item
 
 ## 选中节点
@@ -435,27 +455,28 @@ func _open_file(res_path: String):
 func _on_item_collapsed(item: TreeItem):
 	if item.collapsed:
 		return
+	var data: NodeData = item.get_metadata(0)
+	if data != null and data.slot_item != null: # 移除占位符
+		data.slot_item.free()
+		data.slot_item = null
 	var children: TreeItem = item.get_children()
 	if !children: # 没有子节点
-		var data: NodeData = item.get_metadata(0)
 		if data and data.node.get_child_count() > 0: # 加载子节点
-			call_deferred("_load_children_item", item, null)
+			call_deferred("_load_children_item", item)
 		return
-	var data: NodeData = children.get_metadata(0)
-	if !data: # 没有data，说明没有初始化数据，这里也有加载子节点
+	var child_data: NodeData = children.get_metadata(0)
+	if !child_data: # 没有data，说明没有初始化数据，这里也有加载子节点
 		if _is_in_select_func:
-			_load_children_item(item, children)
+			_load_children_item(item)
 		else:
-			call_deferred("_load_children_item", item, children)
+			call_deferred("_load_children_item", item)
 	else: # 执行更新子节点
 		if _is_in_select_func:
 			_update_children(item, item.get_metadata(0))
 		else:
 			call_deferred("_update_children", item, item.get_metadata(0))
 
-func _load_children_item(item: TreeItem, slot: TreeItem, add_slot: bool = true):
-	if slot:
-		item.remove_child(slot)
+func _load_children_item(item: TreeItem, add_slot: bool = true):
 	var data: NodeData = item.get_metadata(0)  # 获取存储的节点引用
 	if data:
 		if !is_instance_valid(data.node): # 节点可能已被删除

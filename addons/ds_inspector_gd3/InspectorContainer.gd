@@ -19,6 +19,7 @@ onready var rect_attr: PackedScene = preload("res://addons/ds_inspector_gd3/Attr
 onready var string_attr: PackedScene = preload("res://addons/ds_inspector_gd3/Attributes/StringAttr.tscn")
 onready var texture_attr: PackedScene = preload("res://addons/ds_inspector_gd3/Attributes/TextureAttr.tscn")
 onready var sprite_frames_attr: PackedScene = preload("res://addons/ds_inspector_gd3/Attributes/SpriteFramesAttr.tscn")
+onready var enum_attr: PackedScene = preload("res://addons/ds_inspector_gd3/Attributes/EnumAttr.tscn")
 
 class AttrItem:
 	var attr: BaseAttr
@@ -131,7 +132,10 @@ func _create_node_attr(prop) -> AttrItem:
 				TYPE_BOOL:
 					attr = bool_attr.instance()
 				TYPE_INT:
-					attr = number_attr.instance()
+					if prop.hint == PROPERTY_HINT_ENUM:
+						attr = enum_attr.instance()
+					else:
+						attr = number_attr.instance()
 				TYPE_REAL:
 					attr = number_attr.instance()
 				TYPE_VECTOR2:
@@ -152,6 +156,10 @@ func _create_node_attr(prop) -> AttrItem:
 	add_child(attr)
 	attr.set_node(_curr_node)
 	attr.set_name(prop.name)
+
+	if attr is EnumAttr:
+		attr.set_enum_options(prop.hint_string)
+
 	attr.set_value(v)
 	# print(prop.name, "   ", typeof(v))
 	return AttrItem.new(attr, prop.name, prop.usage, prop.type)

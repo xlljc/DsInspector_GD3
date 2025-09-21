@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/ds_inspector_gd3/Attributes/ColorAttr.gd"
 }, {
+"base": "BaseAttr",
+"class": "EnumAttr",
+"language": "GDScript",
+"path": "res://addons/ds_inspector_gd3/Attributes/EnumAttr.gd"
+}, {
 "base": "Tree",
 "class": "ExcludeList",
 "language": "GDScript",
@@ -84,6 +89,7 @@ _global_script_class_icons={
 "BoolAttr": "",
 "Brush": "",
 "ColorAttr": "",
+"EnumAttr": "",
 "ExcludeList": "",
 "InspectorContainer": "",
 "LabelAttr": "",

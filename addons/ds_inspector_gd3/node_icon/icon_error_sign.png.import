@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon_error_sign.svg-1309b564e0652c48e7c9bbcd6a6fc04f.stex"
+path="res://.import/icon_error_sign.png-5b6358d9ddf2dc74977426dfd49e331b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ds_inspector_gd3/node_icon/icon_error_sign.svg"
-dest_files=[ "res://.import/icon_error_sign.svg-1309b564e0652c48e7c9bbcd6a6fc04f.stex" ]
+source_file="res://addons/ds_inspector_gd3/node_icon/icon_error_sign.png"
+dest_files=[ "res://.import/icon_error_sign.png-5b6358d9ddf2dc74977426dfd49e331b.stex" ]
 
 [params]
 
