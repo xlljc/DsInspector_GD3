@@ -158,7 +158,7 @@ var _is_in_select_func: bool = false
 var _next_frame_index: int = 0
 var _next_frame_select: TreeItem = null # 下一帧要选中的item
 onready var icon_mapping: IconMapping = IconMapping.new()
-onready var debug_tool = get_node("/root/DsInspector")
+onready var debug_tool = get_node("/root/DsInspectorTool")
 onready var _script_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/icon_script.svg")
 onready var _scene_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/icon_play_scene.svg")
 onready var _visible_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/Visible.png")
@@ -204,7 +204,7 @@ func init_tree():
 	# 递归添加子节点
 	for child in root.get_children():
 		if debug_tool and child == debug_tool:
-			continue  # 跳过 DsInspector 节点
+			continue  # 跳过 DsInspectorTool 节点
 		create_node_item(child, root_item, true)
 
 # 显示场景树

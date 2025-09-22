@@ -110,7 +110,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-DsInspector="*res://addons/ds_inspector_gd3/DsInspector.tscn"
+DsInspector="*res://addons/ds_inspector_gd3/DsInspector.gd"
 
 [display]
 

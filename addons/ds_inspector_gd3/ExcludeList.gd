@@ -4,7 +4,7 @@ class_name ExcludeList
 export var add_btn_path: NodePath
 
 onready var add_btn: Button = get_node(add_btn_path)
-onready var debug_tool = get_node("/root/DsInspector")
+onready var debug_tool = get_node("/root/DsInspectorTool")
 var _list: Array = []
 var _root_item: TreeItem
 onready var _delete_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/delete.svg")

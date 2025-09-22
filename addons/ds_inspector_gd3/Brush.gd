@@ -10,7 +10,7 @@ var _in_canvaslayer: bool = false
 onready var control: Control = $"../Control"
 onready var icon_tex_rect: TextureRect = $"../Control/ColorRect/Icon"
 onready var path_label: Label = $"../Control/Path"
-onready var debug_tool = get_node("/root/DsInspector")
+onready var debug_tool = get_node("/root/DsInspectorTool")
 
 var _icon: Texture
 var _show_text: bool = false

@@ -5,7 +5,7 @@
 **DsInspector（Developer Support Inspector）** 是一个用于 **Godot 3** 的运行时调试插件，允许你在游戏运行时实时查看和修改场景树中的节点和属性。
 它提供类似于编辑器 Inspector 的功能，让开发者在调试和测试过程中更加方便直观。
 
-![screenshot](addons/ds_inspector_gd3/Icon.png)
+![screenshot](addons/ds_inspector_gd3/icon/Icon.png)
 
 ## 功能特性
 
@@ -17,6 +17,7 @@
 * **打开脚本/场景路径**：在属性面板中可快速打开关联的脚本或在资源管理器中定位场景文件路径，方便跳转查看源文件。
 * **将节点保存为场景**：支持将选中的节点导出并保存为新的场景（例如 `.tscn`），便于复用和共享。
 * **做弊按钮**：可以通过 `DsInspector.add_cheat_button()` 快速添加做弊按钮。
+* **导出自动屏蔽插件**：该插件仅在编辑器运行游戏时生效，导出游戏后自动屏蔽插件所有功能，无需做额外设置。
 
 ## 支持版本
 
@@ -37,7 +38,7 @@
 
 ## 截图
 
-### 节点树与属性面板
+### ![prevoew](docs/prevoew.gif)
 
 ![screenshot](docs/img1.png)
 ![screenshot](docs/img2.png)

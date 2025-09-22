@@ -11,7 +11,7 @@ onready var clear_search_btn: Button = get_node(clear_search_btn_path)
 onready var search_input: LineEdit = get_node(search_input_path)
 onready var node_tree: Tree = get_node(node_tree_path)
 onready var search_tree: Tree = get_node(search_tree_path)
-onready var debug_tool = get_node("/root/DsInspector")
+onready var debug_tool = get_node("/root/DsInspectorTool")
 
 func _ready():
 	search_btn.connect("pressed", self, "_do_serach")

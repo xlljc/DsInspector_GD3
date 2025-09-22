@@ -26,7 +26,7 @@ onready var file_window: FileDialog = get_node(file_window_path)
 onready var put_away: Button = get_node(put_away_path)
 onready var confirmation: ConfirmationDialog = get_node(confirmation_path)
 
-onready var debug_tool = get_node("/root/DsInspector")
+onready var debug_tool = get_node("/root/DsInspectorTool")
 
 onready var play_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/Play.svg")
 onready var pause_icon: Texture = preload("res://addons/ds_inspector_gd3/icon/Pause.svg")

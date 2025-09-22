@@ -1,8 +1,12 @@
 extends VBoxContainer
 
 export var cheat_package_scene: PackedScene;
-onready var cheat_list: VBoxContainer = $Scroll/CheatList
 
+var cheat_list: VBoxContainer;
+
+func init_node():
+	cheat_list = $Scroll/CheatList
+	pass
 
 func add_cheat_button(title: String, target: Node, method: String):
 	var item: Control = cheat_package_scene.instance();
