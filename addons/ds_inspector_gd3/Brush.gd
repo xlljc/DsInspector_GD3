@@ -46,7 +46,7 @@ func set_show_text(flag: bool):
 
 func _draw():
 	if _draw_node != null:
-		if !is_instance_valid(_draw_node):
+		if !is_instance_valid(_draw_node) or !_draw_node.is_inside_tree():
 			_draw_node = null
 			return
 		var op: Vector2 = Vector2.ZERO
