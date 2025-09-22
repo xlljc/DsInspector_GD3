@@ -9,7 +9,7 @@ It provides Inspector-like features similar to the editor, making debugging and 
 
 ## Features
 
-- **Real-time scene tree view**: Shows all nodes in the currently running scene.
+- **Real-time scene tree view**: Shows all nodes in the currently running scene, only supports 2D scene inspection, not 3D scene.
 - **Node property inspection**: View and edit node properties (including exported script variables); changes take effect immediately.
 - **Node search**: Quickly find target nodes.
 - **Node selection & highlight**: Locate the selected node in the game view. After enabling "Pick Node", click scene elements to select them; if elements overlap, click repeatedly to cycle through stacked nodes.
